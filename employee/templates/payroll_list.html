@@ -1,0 +1,33 @@
+<h2>Payroll Records</h2>
+
+<a href="{% url 'payroll_report' %}" class="btn btn-success">Download Payroll Report</a>
+
+
+<table>
+    <thead>
+        <tr>
+            <th>Employee</th>
+            <th>Basic Salary</th>
+            <th>Bonus</th>
+            <th>Deductions</th>
+            <th>Total Pay</th>
+            <th>Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for payroll in payrolls %}
+        <tr>
+            <td>{{ payroll.employee.user.username }}</td>
+            <td>{{ payroll.salary }}</td>
+            <td>{{ payroll.bonus }}</td>
+            <td>{{ payroll.deductions }}</td>
+            <td>{{ payroll.total_pay }}</td>
+            <td>{{ payroll.date }}</td>
+            <td>
+                <a href="{% url 'payroll_update' payroll.pk %}">Edit</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

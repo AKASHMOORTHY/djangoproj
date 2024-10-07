@@ -1,0 +1,9 @@
+<h2>Employee Detail</h2>
+<p>ID: {{ employee.id }}</p>
+<p>Username: {{ employee.user.username }}</p>
+<p>Position: {{ employee.position }}</p>
+<p>Department: {{ employee.department }}</p>
+<p>Date of Joining: {{ employee.date_of_joining }}</p>
+<a href="{% url 'employee_update' employee.pk %}">Edit</a>
+<a href="{% url 'employee_delete' employee.pk %}">Delete</a>
+<a href="{% url 'employee_list' %}">Back to List</a>

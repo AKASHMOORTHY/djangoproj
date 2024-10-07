@@ -1,0 +1,43 @@
+<h2>Employee List</h2>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Position</th>
+        <th>Department</th>
+        <th>Actions</th>
+        <th>Payroll</th>
+        <th>Attendance</th>
+    </tr>
+    {% for employee in employees %}
+    <tr>
+        <td>{{ employee.id }}</td>
+        <td>{{ employee.user.username }}</td>
+        <td>{{ employee.position }}</td>
+        <td>{{ employee.department }}</td>
+        <td>
+            <a href="{% url 'employee_detail' employee.pk %}">View</a>
+            <a href="{% url 'employee_update' employee.pk %}">Edit</a>
+            <a href="{% url 'employee_delete' employee.pk %}">Delete</a>
+        </td>
+        <td>
+            {# Check if payroll exists for this employee #}
+            {% if employee.payroll_set.exists %}
+                <a href="{% url 'payroll_update' employee.payroll_set.first.pk %}">Edit Payroll</a>
+            {% else %}
+                <a href="{% url 'payroll_create' %}">Create Payroll</a>
+            {% endif %}
+        </td>
+        <td>
+            {# Check if attendance exists for this employee #}
+            {% if employee.attendance_set.exists %}
+                <a href="{% url 'attendance_update' employee.attendance_set.first.pk %}">Edit Attendance</a>
+            {% else %}
+                <a href="{% url 'attendance_create' %}">Mark Attendance</a>
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<a href="{% url 'employee_create' %}">Create New Employee</a>
